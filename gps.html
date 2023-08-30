@@ -1,0 +1,19 @@
+<script>
+    const successCallback = (position) => {
+      console.log(position);
+    };
+    
+    const errorCallback = (error) => {
+      console.log(error);
+    };
+    
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+    };
+    
+    const id = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+    
+    
+    
+    </script>
