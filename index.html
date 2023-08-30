@@ -4,12 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Geolocation Example</title>
+<style>
+  #popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid black;
+  }
+</style>
 </head>
 <body>
 <div id="coordinates">Waiting for geolocation data...</div>
+<div id="popup">Popup content</div>
 
 <script>
 const coordinatesDiv = document.getElementById("coordinates");
+const popupDiv = document.getElementById("popup");
 
 const successCallback = (position) => {
   const latitude = position.coords.latitude;
@@ -17,6 +31,13 @@ const successCallback = (position) => {
 
   // Update the div content with new latitude and longitude
   coordinatesDiv.textContent = `Latitude: ${latitude.toFixed(8)}, Longitude: ${longitude.toFixed(8)}`;
+
+  // Check if the specific latitude and longitude are detected
+  if (latitude === 35.28511730 && longitude === -93.02734002) {
+    popupDiv.style.display = "block";
+  } else {
+    popupDiv.style.display = "none";
+  }
 };
 
 const errorCallback = (error) => {
@@ -25,7 +46,6 @@ const errorCallback = (error) => {
 };
 
 const options = {
-  
   timeout: 15000,
 };
 
