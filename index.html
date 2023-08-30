@@ -1,19 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geolocation Example</title>
+</head>
+<body>
+<div id="coordinates">Waiting for geolocation data...</div>
+
 <script>
-    const successCallback = (position) => {
-      console.log(position);
-    };
-    
-    const errorCallback = (error) => {
-      console.log(error);
-    };
-    
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-    };
-    
-    const id = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
-    
-    
-    
+const coordinatesDiv = document.getElementById("coordinates");
+
+const successCallback = (position) => {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  // Update the div content with new latitude and longitude
+  coordinatesDiv.textContent = `Latitude: ${latitude.toFixed(6)}, Longitude: ${longitude.toFixed(6)}`;
+};
+
+const errorCallback = (error) => {
+  console.log(error);
+  coordinatesDiv.textContent = "Error getting geolocation data.";
+};
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+};
+
+const id = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
 </script>
+</body>
+</html>
