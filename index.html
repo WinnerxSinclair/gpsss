@@ -30,12 +30,12 @@ const successCallback = (position) => {
   const longitude = position.coords.longitude;
 
   // Update the div content with new latitude and longitude
-  coordinatesDiv.textContent = `Latitude: ${latitude.toFixed(3)}, Longitude: ${longitude.toFixed(3)}`;
+  coordinatesDiv.textContent = `Latitude: ${latitude.toFixed(5)}, Longitude: ${longitude.toFixed(5)}`;
 
   // Check if the specific latitude and longitude are detected
   // Instead of exact coordinates, check if the obtained coordinates are within a certain range
-const latitudeThreshold = 0.005;
-const longitudeThreshold = 0.005;
+const latitudeThreshold = 0.0009;
+const longitudeThreshold = 0.0009;
 
 if (Math.abs(latitude - 35.285) < latitudeThreshold && Math.abs(longitude + 93.027) < longitudeThreshold) {
   popupDiv.style.display = "block";
