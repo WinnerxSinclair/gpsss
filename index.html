@@ -33,11 +33,16 @@ const successCallback = (position) => {
   coordinatesDiv.textContent = `Latitude: ${latitude.toFixed(3)}, Longitude: ${longitude.toFixed(3)}`;
 
   // Check if the specific latitude and longitude are detected
-  if (latitude === 35.285 && longitude === -93.027) {
-    popupDiv.style.display = "block";
-  } else {
-    popupDiv.style.display = "none";
-  }
+  // Instead of exact coordinates, check if the obtained coordinates are within a certain range
+const latitudeThreshold = 0.005;
+const longitudeThreshold = 0.005;
+
+if (Math.abs(latitude - 35.285) < latitudeThreshold && Math.abs(longitude + 93.027) < longitudeThreshold) {
+  popupDiv.style.display = "block";
+} else {
+  popupDiv.style.display = "none";
+}
+
 };
 
 const errorCallback = (error) => {
