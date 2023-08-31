@@ -19,11 +19,21 @@
 </head>
 <body>
 <div id="coordinates">Waiting for geolocation data...</div>
-<div id="popup">Popup content</div>
+
+<div class = "container">
+  <div id="popup">
+    <p>I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?</p>
+    <label for="answer">Your Answer: </label>
+    <input type="text" id="answer" name="answer">
+    <button id="checkAnswer">Check Answer</button>
+  </div>
+</div>
 
 <script>
 const coordinatesDiv = document.getElementById("coordinates");
 const popupDiv = document.getElementById("popup");
+const answerInput = document.getElementById("answer");
+    const checkAnswerButton = document.getElementById("checkAnswer");
 
 const successCallback = (position) => {
   const latitude = position.coords.latitude;
@@ -34,10 +44,10 @@ const successCallback = (position) => {
 
   // Check if the specific latitude and longitude are detected
   // Instead of exact coordinates, check if the obtained coordinates are within a certain range
-const latitudeThreshold = 0.001;
-const longitudeThreshold = 0.001;
+const latitudeThreshold = 0.0005;
+const longitudeThreshold = 0.0005;
 
-if (Math.abs(latitude - 35.285) <= latitudeThreshold && Math.abs(longitude + 93.027) <= longitudeThreshold) {
+if (Math.abs(latitude - 35.28500) <= latitudeThreshold && Math.abs(longitude + 93.02700) <= longitudeThreshold) {
   popupDiv.style.display = "block";
 } else {
   popupDiv.style.display = "none";
@@ -57,6 +67,17 @@ const options = {
 };
 
 const id = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+
+checkAnswerButton.addEventListener("click", () => {
+      const userAnswer = answerInput.value.toLowerCase();
+      if (userAnswer === "echo") {
+        // Correct answer action
+        alert("Correct! You solved the riddle.");
+      } else {
+        // Incorrect answer action
+        alert("Incorrect answer. Try again!");
+      }
+    });
 </script>
 </body>
 </html>
